@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations */
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Custom components */
+@layer components {
+  .toggle-slider {
+    @apply relative w-12 h-6 bg-gray-300 rounded-full transition-colors duration-200 ease-in-out;
+  }
+
+  .toggle-slider::before {
+    @apply absolute w-5 h-5 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-200 ease-in-out shadow-sm;
+    content: '';
+  }
+
+  .toggle-slider.active {
+    @apply bg-green-500;
+  }
+
+  .toggle-slider.active::before {
+    @apply transform translate-x-6;
+  }
+
+  .loading-dots::after {
+    animation: dots 1.5s infinite;
+    content: '';
+  }
+
+  .drag-over {
+    @apply border-primary-500 bg-primary-50 scale-105;
+  }
+
+  .status-icon {
+    @apply absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow-md;
+  }
+
+  .status-converting {
+    @apply bg-warning-500 text-white animate-spin;
+  }
+
+  .status-completed {
+    @apply bg-success-500 text-white;
+  }
+
+  .status-error {
+    @apply bg-red-500 text-white;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, theme('colors.primary.600') 0%, theme('colors.primary.500') 50%, theme('colors.purple.500') 100%);
+  }
+
+  .gradient-success {
+    background: linear-gradient(135deg, theme('colors.success.50') 0%, theme('colors.success.100') 100%);
+  }
+
+  .gradient-soft {
+    background: linear-gradient(135deg, theme('colors.gray.50') 0%, theme('colors.gray.100') 100%);
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Range slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  @apply h-2 bg-gray-200 rounded-full outline-none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  @apply w-5 h-5 bg-primary-500 rounded-full cursor-pointer shadow-md hover:scale-110 transition-transform;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-5 h-5 bg-primary-500 rounded-full cursor-pointer border-0 shadow-md;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  @apply w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500;
+}
